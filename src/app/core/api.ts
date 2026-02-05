@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 export type ReqResUser = {
   id: number;
   email: string;
@@ -30,29 +32,23 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getUsersPage(page: number): Observable<UsersPageResponse> {
-    const cached = this.usersPageCache.get(page);
-    if (cached) return cached;
+  private headers = {
+  'x-api-key': environment.reqresApiKey,
+};
 
-    const req$ = this.http
-      .get<UsersPageResponse>(`${this.baseUrl}/users?page=${page}`)
-      .pipe(shareReplay(1));
+getUsersPage(page: number) {
+  return this.http.get<UsersPageResponse>(
+    `${this.baseUrl}/users?page=${page}`,
+    { headers: this.headers }
+  );
+}
 
-    this.usersPageCache.set(page, req$);
-    return req$;
-  }
-
-  getUserById(id: number): Observable<SingleUserResponse> {
-    const cached = this.userCache.get(id);
-    if (cached) return cached;
-
-    const req$ = this.http
-      .get<SingleUserResponse>(`${this.baseUrl}/users/${id}`)
-      .pipe(shareReplay(1));
-
-    this.userCache.set(id, req$);
-    return req$;
-  }
+getUserById(id: number) {
+  return this.http.get<SingleUserResponse>(
+    `${this.baseUrl}/users/${id}`,
+    { headers: this.headers }
+  );
+}
   
   clearCache() {
     this.usersPageCache.clear();
