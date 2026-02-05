@@ -3,10 +3,12 @@
 
   <div class="card">
     <img class="avatar" src={{res.data.avatar}} alt={{res.data.first_name}} />
+    <div class="meta_data">
     <div class="name">
       {{ res.data.first_name }} {{ res.data.last_name }}
     </div>
     <div class="meta">ID: {{ res.data.id }}</div>
     <div class="meta">{{ res.data.email }}</div>
+    </div>
   </div>
 </section>

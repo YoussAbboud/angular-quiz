@@ -8,4 +8,12 @@
       <div class="meta">ID: {{ u.id }}</div>
     </a>
   </div>
+
+  <div class="pager">
+    <button (click)="prev()" [disabled]="res.page === 1">Prev</button>
+    <div class="meta">Page {{ res.page }} / {{ res.total_pages }}</div>
+    <button (click)="next(res.total_pages)" [disabled]="res.page === res.total_pages">
+      Next
+    </button>
+  </div>
 </section>

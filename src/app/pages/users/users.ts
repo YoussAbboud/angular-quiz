@@ -14,5 +14,13 @@ export class Users {
   page = signal(1);
   
   userPage$ = computed(() => this.api.getUsersPage(this.page()));
+
+  prev() {
+    this.page.update((p) => Math.max(1, p - 1));
+  }
+
+  next(totalPages: number) {
+    this.page.update((p) => Math.min(totalPages, p + 1));
+  }
   
 }
