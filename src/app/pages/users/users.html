@@ -1,1 +1,11 @@
-<p>users</p>
+<section class="container" *ngIf="(userPage$() | async) as res">
+  <h1>Users</h1>
+
+  <div class="grid">
+    <a class="card" *ngFor="let u of res.data" [routerLink]="['/users', u.id]">
+      <img class="avatar" [src]="u.avatar" [alt]="u.first_name" />
+      <div class="name">{{ u.first_name }} {{ u.last_name }}</div>
+      <div class="meta">ID: {{ u.id }}</div>
+    </a>
+  </div>
+</section>

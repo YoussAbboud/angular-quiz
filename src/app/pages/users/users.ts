@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ApiService } from '../../core/api';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-users',
-  imports: [],
+  imports: [NgIf, NgFor, AsyncPipe, RouterLink],
   templateUrl: './users.html',
   styleUrl: './users.scss',
 })
 export class Users {
-constructor(private api: ApiService) {
-    this.api.getUsersPage(1).subscribe(res => console.log('users page 1', res));
-  }
+  private api = inject(ApiService);
+  page = signal(1);
+  
+  userPage$ = computed(() => this.api.getUsersPage(this.page()));
+  
 }
