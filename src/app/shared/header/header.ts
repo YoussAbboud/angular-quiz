@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { UsersFilter } from '../../core/users-filter';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [NgIf],
+  imports: [NgIf, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
