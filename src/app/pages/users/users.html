@@ -1,18 +1,21 @@
 <section class="container">
   <h1>Users</h1>
 
-<ng-container *ngIf="singleUser$() as one$; else paged">
-<div class="grid" *ngIf="one$ | async as res; else not_found">
-    <a class="card" [routerLink]="['/users', res.data.id]">
-      <img class="avatar" [src]="res.data.avatar" [alt]="res.data.first_name" />
-      <div class="name">{{ res.data.first_name }} {{ res.data.last_name }}</div>
-      <div class="meta">ID: {{ res.data.id }}</div>
+<ng-container *ngIf="searchId() as s; else paged">
+
+  <div *ngIf="isSearching()" class="loading">Loading…</div>
+
+<div class="grid" *ngIf="!isSearching() && searchedUser()">
+    <a class="card" [routerLink]="['/users', searchedUser()!.id]">
+      <img class="avatar" [src]="searchedUser()!.avatar" [alt]="searchedUser()!.first_name" />
+      <div class="name">{{ searchedUser()!.first_name }} {{ searchedUser()!.last_name }}</div>
+      <div class="meta">ID: {{ searchedUser()!.id }}</div>
     </a>
   </div>
 
-  <ng-template #not_found>
-    <p class="not_found">No User was found, search another ID</p>
-  </ng-template>
+  
+    <div *ngIf="searchFailed()" class="not_found">No User was found, search another ID</div>
+
 </ng-container>
 
 <ng-template #paged>
