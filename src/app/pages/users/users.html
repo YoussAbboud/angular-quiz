@@ -1,6 +1,22 @@
-<section class="container" *ngIf="(userPage$() | async) as res">
+<section class="container">
   <h1>Users</h1>
 
+<ng-container *ngIf="singleUser$() as one$; else paged">
+<div class="grid" *ngIf="one$ | async as res; else not_found">
+    <a class="card" [routerLink]="['/users', res.data.id]">
+      <img class="avatar" [src]="res.data.avatar" [alt]="res.data.first_name" />
+      <div class="name">{{ res.data.first_name }} {{ res.data.last_name }}</div>
+      <div class="meta">ID: {{ res.data.id }}</div>
+    </a>
+  </div>
+
+  <ng-template #not_found>
+    <p class="not_found">No User was found, search another ID</p>
+  </ng-template>
+</ng-container>
+
+<ng-template #paged>
+  <ng-container *ngIf="(userPage$() | async) as res">
   <div class="grid">
     <a class="card" *ngFor="let u of res.data" [routerLink]="['/users', u.id]">
       <img class="avatar" [src]="u.avatar" [alt]="u.first_name" />
@@ -16,4 +32,6 @@
       Next
     </button>
   </div>
+  </ng-container>
+</ng-template>
 </section>

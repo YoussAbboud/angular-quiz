@@ -1,1 +1,21 @@
-<p>header</p>
+<header class="header">
+    <div class="title">angular-quiz 800storage</div>
+
+    <form class="search" (submit)="$event.preventDefault(); submit()">
+        <input
+        type="text"
+        inputmode="numeric"
+        placeholder="Search user by ID…"
+        [value]="searchId()"
+        (input)="onInput(($any($event.target)).value)"
+        (keydown.enter)="submit()"
+        />
+
+        <button type="button" (click)="submit()">Search</button>
+        <button type="button" (click)="clear()">Clear</button>
+
+        <div class="error" *ngIf="error()">{{ error() }}</div>
+
+    </form>
+
+</header>
