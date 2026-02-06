@@ -1,5 +1,5 @@
 <section class="container" *ngIf="user$ | async as res">
-  <button class="back" (click)="goBack()">◄ Back</button>
+  <button class="back" (click)="goBack()">Back</button>
 
   <div class="card">
     <img class="avatar" src={{res.data.avatar}} alt={{res.data.first_name}} />

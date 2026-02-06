@@ -2,6 +2,7 @@
     text-align: center;
     margin: 2rem auto;
     padding: 0 1rem;
+    padding-bottom: 4rem;
 }
 
 h1 {
@@ -20,10 +21,10 @@ h1 {
     gap: 1rem;
     padding: 1rem;
     border-radius: 1.5rem;
-    border: 1px solid black;
+    border: 1px solid #D0D5DD;
     text-decoration: none;
     color: inherit;
-    background: #fff;
+    background: #EEF5FF;
     transition: transform 100ms ease, box-shadow 100ms ease;
 }
 
@@ -59,9 +60,11 @@ h1 {
 .pager button{
     padding: 0.75rem 1.25rem;
     border-radius: 0.5rem;
-    border: 1px solid black;
-    background: beige;
+    border: 1px solid #D0D5DD;
+    background: #004FE5;
     cursor: pointer;
+    font-family: 'Poppins';
+    color: white;
 }
 
 .pager button:disabled {
@@ -70,13 +73,27 @@ h1 {
 }
 
 .not_found{
-    color: red;
+    color: #FD7847;
+    font-weight: 800;
     margin-top: 2rem;
     font-size: 2rem;
 }
 
 .loading{
-    color: yellow;
+    color: #FD7847;
     margin-top: 2rem;
     font-size: 2rem;
+    font-weight: 800;
+}
+
+@media (max-width: 820px) {
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2, 42vw);
+}
+
+.avatar{
+    height: 30vw;
+}
+
 }

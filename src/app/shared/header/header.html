@@ -1,18 +1,20 @@
 <header class="header">
-    <div class="title">angular-quiz 800storage</div>
+    <div class="title"><img src="assets/images/800Logo.svg" width="120" alt="logo" class="header_logo"/></div>
 
     <form class="search" (submit)="$event.preventDefault(); submit()">
         <input
-        type="text"
+        type="number"
         inputmode="numeric"
-        placeholder="Search user by ID…"
+        placeholder="Search ID"
         [value]="searchId()"
         (input)="onInput(($any($event.target)).value)"
         (keydown.enter)="submit()"
         />
 
-        <button type="button" (click)="submit()">Search</button>
-        <button type="button" (click)="clear()">Clear</button>
+        <div class="buttons">
+        <button type="button" (click)="submit()"><i class="fas fa-search"></i></button>
+        <button type="button" (click)="clear()"><i class="fas fa-times"></i></button>
+        </div>
 
         <div class="error" *ngIf="error()">{{ error() }}</div>
 
